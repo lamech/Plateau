@@ -20,26 +20,59 @@
 
 START_NAMESPACE_DISTRHO
 
-class PlateauUI : public UI
+namespace Art = PlateauArtwork;
+
+PlateauUI::PlateauUI()
+    : UI(Art::backgroundWidth, Art::backgroundHeight, true),
+      fImgBackground(Art::backgroundData, Art::backgroundWidth, Art::backgroundHeight, kImageFormatBGR), fImgForeground(Art::foregroundData, Art::foregroundWidth, Art::foregroundHeight, kImageFormatBGRA),
+      fRenderBackground(true) // Initialize the boolean
 {
-    public:
-        PlateauUI()
-            : UI(DISTRHO_UI_DEFAULT_WIDTH, DISTRHO_UI_DEFAULT_HEIGHT)
-        {
+    Image medRoganImage(Art::medRoganData, Art::medRoganWidth, Art::medRoganHeight, kImageFormatBGRA);
+    Image medRoganFGImage(Art::medRoganData, Art::medRoganWidth, Art::medRoganHeight, kImageFormatBGRA);
 
-            setGeometryConstraints(DISTRHO_UI_DEFAULT_WIDTH, DISTRHO_UI_DEFAULT_HEIGHT, true);
-        }
-    
-    protected:
-        void parameterChanged(uint32_t, float) override {}
-
-        void onDisplay() override
-        {
-        }
-
-    private:
-        DISTRHO_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(PlateauUI)
+    fKnobDecay = new ImageKnob(this, medRoganImage, ImageKnob::Vertical);
+    fKnobDecay->setId(7);
+    fKnobDecay->setAbsolutePos(203, 298);
+    fKnobDecay->setRange(0.1f, 0.9999f);
+    fKnobDecay->setDefault(0.7f);
+    fKnobDecay->setRotationAngle(277);
+    fKnobDecay->setCallback(this);
 };
+
+void PlateauUI::parameterChanged(uint32_t index, float value)
+{
+    switch (index)
+    {
+        case Parameters::kDecay:
+            fKnobDecay->setValue(value);
+            break;
+    }
+}
+
+void PlateauUI::imageKnobDragStarted(ImageKnob* knob)
+{
+    editParameter(knob->getId(), true);
+}
+
+void PlateauUI::imageKnobDragFinished(ImageKnob* knob)
+{
+    editParameter(knob->getId(), false);
+}
+
+void PlateauUI::imageKnobValueChanged(ImageKnob* knob, float value)
+{
+    setParameterValue(knob->getId(), value);
+}
+
+void PlateauUI::onDisplay()
+{
+    const GraphicsContext& context(getGraphicsContext());
+
+    if (fRenderBackground) {
+        fImgBackground.draw(context);
+    }
+    fRenderBackground = !fRenderBackground; // Toggle the boolean
+}
 
 UI* createUI()
 {

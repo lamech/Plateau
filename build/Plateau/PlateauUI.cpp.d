@@ -116,13 +116,9 @@
  ../../dpf/dgl/../distrho/src/DistrhoDefines.h \
  C:/msys64/mingw64/include/GL/gl.h C:/msys64/mingw64/include/GL/glext.h \
  C:/msys64/mingw64/include/KHR/khrplatform.h \
- ../../dpf/distrho/../dgl/NanoVG.hpp ../../dpf/distrho/../dgl/Color.hpp \
- ../../dpf/distrho/../dgl/Base.hpp ../../dpf/distrho/../dgl/OpenGL.hpp \
- ../../dpf/distrho/../dgl/SubWidget.hpp \
  ../../dpf/distrho/../dgl/TopLevelWidget.hpp \
- ../../dpf/distrho/../dgl/StandaloneWindow.hpp \
  ../../dpf/dgl/ImageWidgets.hpp ../../dpf/dgl/Image.hpp \
- ../../dpf/dgl/OpenGL.hpp ../../dpf/dgl/Color.hpp
+ ../../dpf/dgl/OpenGL.hpp PlateauArtwork.cpp PlateauArtwork.hpp
 PlateauUI.hpp:
 ../../dpf/distrho/DistrhoUI.hpp:
 ../../dpf/distrho/DistrhoDetails.hpp:
@@ -253,14 +249,9 @@ C:/msys64/mingw64/include/c++/14.2.0/bits/vector.tcc:
 C:/msys64/mingw64/include/GL/gl.h:
 C:/msys64/mingw64/include/GL/glext.h:
 C:/msys64/mingw64/include/KHR/khrplatform.h:
-../../dpf/distrho/../dgl/NanoVG.hpp:
-../../dpf/distrho/../dgl/Color.hpp:
-../../dpf/distrho/../dgl/Base.hpp:
-../../dpf/distrho/../dgl/OpenGL.hpp:
-../../dpf/distrho/../dgl/SubWidget.hpp:
 ../../dpf/distrho/../dgl/TopLevelWidget.hpp:
-../../dpf/distrho/../dgl/StandaloneWindow.hpp:
 ../../dpf/dgl/ImageWidgets.hpp:
 ../../dpf/dgl/Image.hpp:
 ../../dpf/dgl/OpenGL.hpp:
-../../dpf/dgl/Color.hpp:
+PlateauArtwork.cpp:
+PlateauArtwork.hpp:

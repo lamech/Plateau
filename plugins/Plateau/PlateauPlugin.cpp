@@ -38,6 +38,8 @@ class Plateau : public Plugin {
 
         float diffuseInput = 1.f;
 
+        void updateReverbParameter(uint32_t index);
+
         DISTRHO_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(Plateau)
 };
 
@@ -92,6 +94,9 @@ void Plateau::initParameter(uint32_t index, Parameter& parameter) {
         parameter.ranges.max = info.max;
         parameter.hints = info.hints;
     }
+    for (uint32_t i = 0; i < kParamCount; ++i) {
+        updateReverbParameter(i);
+    }
 }
 
 float Plateau::getParameterValue(uint32_t index) const {
@@ -104,6 +109,45 @@ float Plateau::getParameterValue(uint32_t index) const {
 void Plateau::setParameterValue(uint32_t index, float value) {
     if (index < sizeof(parameterInfos) / sizeof(ParameterInfo)) {
         *(&dry + index) = value;
+        updateReverbParameter(index);
+    }
+}
+
+void Plateau::updateReverbParameter(uint32_t index) {
+    switch (index) {
+        case 5: // Size
+            reverb.setTimeScale(size);
+            break;
+        case 2: // Pre Delay
+            reverb.setPreDelay(preDelay);
+            break;
+        case 3: // Input High Pass
+            reverb.setInputFilterLowCutoffPitch(10.f - inputLowDamp);
+            break;
+        case 4: // Input Low Pass
+            reverb.setInputFilterHighCutoffPitch(inputHighDamp);
+            break;
+        case 6: // Diffusion
+            reverb.setTankDiffusion(diffusion);
+            break;
+        case 7: // Decay
+            reverb.setDecay(2.f * decay - decay * decay);
+            break;
+        case 8: // Reverb High Pass
+            reverb.setTankFilterLowCutFrequency(10.f - reverbLowDamp);
+            break;
+        case 9: // Reverb Low Pass
+            reverb.setTankFilterHighCutFrequency(reverbHighDamp);
+            break;
+        case 10: // Modulation Speed
+            reverb.setTankModSpeed(modSpeed * modSpeed * 99.f + 1.f);
+            break;
+        case 11: // Modulation Depth
+            reverb.setTankModDepth(modDepth);
+            break;
+        case 12: // Modulation Shape
+            reverb.setTankModShape(modShape);
+            break;
     }
 }
 
@@ -113,19 +157,7 @@ void Plateau::run(const float **inputs, float **outputs, uint32_t frames) {
     float *const outLeft = outputs[0];
     float *const outRight = outputs[1];
 
-    reverb.setTimeScale(size);
-    reverb.setPreDelay(preDelay);
-    reverb.setInputFilterLowCutoffPitch(10.f-inputLowDamp);
-    reverb.setInputFilterHighCutoffPitch(inputHighDamp);
     reverb.enableInputDiffusion(diffuseInput > 0.5f);
-    reverb.setDecay(2.f*decay-decay*decay);
-    reverb.setTankDiffusion(diffusion);
-    reverb.setTankFilterLowCutFrequency(10.f-reverbLowDamp);
-    reverb.setTankFilterHighCutFrequency(reverbHighDamp);
-    reverb.setTankModSpeed(modSpeed*modSpeed*99.f+1.f);
-    reverb.setTankModDepth(modDepth);
-    reverb.setTankModShape(modShape);
-
 
     for (uint32_t i = 0; i < frames; ++i) {
         reverb.process((double)inLeft[i], (double)inRight[i]);

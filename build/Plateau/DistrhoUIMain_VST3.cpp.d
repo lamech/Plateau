@@ -353,13 +353,7 @@
  ../../dpf/dgl/../distrho/src/DistrhoDefines.h \
  C:/msys64/mingw64/include/GL/gl.h C:/msys64/mingw64/include/GL/glext.h \
  C:/msys64/mingw64/include/KHR/khrplatform.h \
- ../../dpf/distrho/src/../../dgl/NanoVG.hpp \
- ../../dpf/distrho/src/../../dgl/Color.hpp \
- ../../dpf/distrho/src/../../dgl/Base.hpp \
- ../../dpf/distrho/src/../../dgl/OpenGL.hpp \
- ../../dpf/distrho/src/../../dgl/SubWidget.hpp \
  ../../dpf/distrho/src/../../dgl/TopLevelWidget.hpp \
- ../../dpf/distrho/src/../../dgl/StandaloneWindow.hpp \
  ../../dpf/distrho/src/DistrhoPluginVST.hpp \
  ../../dpf/distrho/src/DistrhoPluginChecks.h \
  ../../dpf/distrho/src/../DistrhoUtils.hpp ../../dpf/dgl/Base.hpp \
@@ -783,13 +777,7 @@ C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/stdbool.h:
 C:/msys64/mingw64/include/GL/gl.h:
 C:/msys64/mingw64/include/GL/glext.h:
 C:/msys64/mingw64/include/KHR/khrplatform.h:
-../../dpf/distrho/src/../../dgl/NanoVG.hpp:
-../../dpf/distrho/src/../../dgl/Color.hpp:
-../../dpf/distrho/src/../../dgl/Base.hpp:
-../../dpf/distrho/src/../../dgl/OpenGL.hpp:
-../../dpf/distrho/src/../../dgl/SubWidget.hpp:
 ../../dpf/distrho/src/../../dgl/TopLevelWidget.hpp:
-../../dpf/distrho/src/../../dgl/StandaloneWindow.hpp:
 ../../dpf/distrho/src/DistrhoPluginVST.hpp:
 ../../dpf/distrho/src/DistrhoPluginChecks.h:
 ../../dpf/distrho/src/../DistrhoUtils.hpp:

@@ -34,4 +34,7 @@ endif
 all: $(TARGETS)
 
 art: # Converts the artwork to a header file
-	py png2rgba.py PlateauArtwork artwork/
+	python png2rgba.py PlateauArtwork artwork
+
+apply: # Copies the VST3 file to the specified directory
+	cp ../../bin/Plateau.vst3/Contents/x86_64-win/Plateau.vst3 "C:\Program Files\Common Files\VST3"
