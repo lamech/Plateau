@@ -1,5 +1,7 @@
 #include "DistrhoPlugin.hpp"
 #include "./dsp/Dattorro.cpp"
+#include "./dsp/LinearEnvelope.cpp"
+#include "Parameters.hpp"
 
 START_NAMESPACE_DISTRHO
 
@@ -21,6 +23,7 @@ class Plateau : public Plugin {
 
     private:
         Dattorro reverb;
+        LinearEnvelope envelope;
 
         float dry = 1.f;
         float wet = 0.5f;
@@ -36,14 +39,29 @@ class Plateau : public Plugin {
         float modDepth = 0.5f;
         float modShape = 0.5f;
 
+        float freeze = 0.f;
+        float clearParam = 0.f;
+        float tunedMode = 0.f;
         float diffuseInput = 1.f;
+
+        bool clear = false;
+        bool cleared = true;
+        bool fadeOut = false;
+        bool fadeIn = false;
+        
+        bool frozen = false;
 
         void updateReverbParameter(uint32_t index);
 
         DISTRHO_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(Plateau)
 };
 
-Plateau::Plateau() : Plugin(kParamCount, 0, 0) {}
+Plateau::Plateau() : Plugin(kParamCount, 0, 0) {
+    reverb.setSampleRate(getSampleRate());
+    envelope.setSampleRate(getSampleRate());
+    envelope.setTime(0.004f);
+    envelope._value = 1.f;
+}
 
 const char *Plateau::getLabel() const { return "Plateau"; }
 
@@ -58,31 +76,6 @@ const char *Plateau::getLicense() const { return "MIT"; }
 uint32_t Plateau::getVersion() const { return d_version(1,0,0); }
 
 int64_t Plateau::getUniqueId() const { return d_cconst('P', 'L', 'T', 'U'); }
-
-struct ParameterInfo {
-    const char* name;
-    const char* symbol;
-    float def;
-    float min;
-    float max;
-    uint32_t hints;
-};
-
-const ParameterInfo parameterInfos[] = {
-    {"Dry", "dry", 1.0f, 0.0f, 1.0f, kParameterIsAutomatable},
-    {"Wet", "wet", 0.5f, 0.0f, 1.0f, kParameterIsAutomatable},
-    {"Pre Delay", "preDelay", 0.0f, 0.0f, 0.5f, kParameterIsAutomatable},
-    {"Input High Pass", "inputLowDamp", 10.0f, 0.0f, 10.0f, kParameterIsAutomatable},
-    {"Input Low Pass", "inputHighDamp", 10.0f, 0.0f, 10.0f, kParameterIsAutomatable},
-    {"Size", "size", 0.5f, 0.0f, 1.0f, kParameterIsAutomatable},
-    {"Diffusion", "diffusion", 10.0f, 0.0f, 10.0f, kParameterIsAutomatable},
-    {"Decay", "decay", 0.7f, 0.1f, 0.9999f, kParameterIsAutomatable},
-    {"Reverb High Pass", "reverbLowDamp", 10.0f, 0.0f, 10.0f, kParameterIsAutomatable},
-    {"Reverb Low Pass", "reverbHighDamp", 10.0f, 0.0f, 10.0f, kParameterIsAutomatable},
-    {"Modulation Speed", "modSpeed", 0.0f, 0.0f, 1.0f, kParameterIsAutomatable},
-    {"Modulation Depth", "modDepth", 0.5f, 0.0f, 16.0f, kParameterIsAutomatable},
-    {"Modulation Shape", "modShape", 0.5f, 0.0f, 1.0f, kParameterIsAutomatable}
-};
 
 void Plateau::initParameter(uint32_t index, Parameter& parameter) {
     if (index < sizeof(parameterInfos) / sizeof(ParameterInfo)) {
@@ -115,38 +108,46 @@ void Plateau::setParameterValue(uint32_t index, float value) {
 
 void Plateau::updateReverbParameter(uint32_t index) {
     switch (index) {
-        case 5: // Size
-            reverb.setTimeScale(size);
-            break;
-        case 2: // Pre Delay
+        case kPreDelay:
             reverb.setPreDelay(preDelay);
             break;
-        case 3: // Input High Pass
+        case kInputLowDamp:
             reverb.setInputFilterLowCutoffPitch(10.f - inputLowDamp);
             break;
-        case 4: // Input Low Pass
+        case kInputHighDamp:
             reverb.setInputFilterHighCutoffPitch(inputHighDamp);
             break;
-        case 6: // Diffusion
+        case kSize:
+        case kTunedMode:
+            if (tunedMode > 0.5f) {
+                reverb.setTimeScale(0.0025f * powf(2.f, size * 5.f));
+            } else {
+                reverb.setTimeScale(scale(size*size, 0.f, 1.f, 0.01f, 4.0f));
+            }
+            break;
+        case kDiffusion:
             reverb.setTankDiffusion(diffusion);
             break;
-        case 7: // Decay
+        case kDecay:
             reverb.setDecay(2.f * decay - decay * decay);
             break;
-        case 8: // Reverb High Pass
+        case kReverbLowDamp:
             reverb.setTankFilterLowCutFrequency(10.f - reverbLowDamp);
             break;
-        case 9: // Reverb Low Pass
+        case kReverbHighDamp:
             reverb.setTankFilterHighCutFrequency(reverbHighDamp);
             break;
-        case 10: // Modulation Speed
+        case kModSpeed:
             reverb.setTankModSpeed(modSpeed * modSpeed * 99.f + 1.f);
             break;
-        case 11: // Modulation Depth
+        case kModDepth:
             reverb.setTankModDepth(modDepth);
             break;
-        case 12: // Modulation Shape
+        case kModShape:
             reverb.setTankModShape(modShape);
+            break;
+        case kDiffuseInput:
+            reverb.enableInputDiffusion(diffuseInput > 0.5f);
             break;
     }
 }
@@ -157,10 +158,46 @@ void Plateau::run(const float **inputs, float **outputs, uint32_t frames) {
     float *const outLeft = outputs[0];
     float *const outRight = outputs[1];
 
-    reverb.enableInputDiffusion(diffuseInput > 0.5f);
-
     for (uint32_t i = 0; i < frames; ++i) {
-        reverb.process((double)inLeft[i], (double)inRight[i]);
+        if(clearParam > 0.5f && !clear && cleared) {
+            cleared = false;
+            clear = true;
+        }
+        else if(clearParam <= 0.5f && cleared) {
+            clear = false;
+        }
+
+        if(clear) {
+            if(!cleared && !fadeOut && !fadeIn) {
+                fadeOut = true;
+                envelope.setStartEndPoints(1.f, 0.f);
+                envelope.trigger();
+            }
+            if(fadeOut && envelope._justFinished) {
+                reverb.clear();
+                fadeOut = false;
+                fadeIn = true;
+                envelope.setStartEndPoints(0.f, 1.f);
+                envelope.trigger();
+            }
+            if(fadeIn && envelope._justFinished) {
+                fadeIn = false;
+                cleared = true;
+                envelope._value = 1.f;
+            }
+        }
+        envelope.process();
+
+        if(freeze>0.5f && !frozen) {
+            frozen = true;
+            reverb.freeze(frozen);
+        }
+        else if(freeze<=0.5f && frozen){
+            frozen = false;
+            reverb.freeze(frozen);
+        }
+
+        reverb.process((double)(inLeft[i] * envelope._value), (double)(inRight[i] * envelope._value));
         outLeft[i] = inLeft[i] * dry + (float)reverb.getLeftOutput() * wet;
         outRight[i] = inRight[i] * dry + (float)reverb.getRightOutput() * wet;
     }

@@ -29,7 +29,7 @@ public:
         _inSum = input + delay.output * gain;
 
         //output is the delay output subtract the feedback input
-        output = delay.output + _inSum * gain * -1;
+        output = delay.output - _inSum * gain;
 
         //feed the next sample into the delay
         delay.input = _inSum;
@@ -94,8 +94,8 @@ public:
         _inSum1 = input + delay1.output * gain1;
         _inSum2 = _inSum1 + delay2.output * gain2;
         delay2.input = _inSum2;
-        delay1.input = delay2.output * decay2 + _inSum2 * -gain2;
-        output = delay1.output * decay1 + _inSum1 * -gain1;
+        delay1.input = delay2.output * decay2 - _inSum2 * gain2;
+        output = delay1.output * decay1 - _inSum1 * gain1;
         delay1.process();
         delay2.process();
         return output;

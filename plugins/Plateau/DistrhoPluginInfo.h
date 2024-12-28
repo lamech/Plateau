@@ -15,22 +15,4 @@
 #define DISTRHO_UI_USER_RESIZABLE 0
 #define DISTRHO_UI_USE_NANOVG 0
 
-enum Parameters {
-    kDry,
-    kWet,
-    kPreDelay,
-    kInputLowDamp,
-    kInputHighDamp,
-    kSize,
-    kDiffusion,
-    kDecay,
-    kReverbLowDamp,
-    kReverbHighDamp,
-    kModSpeed,
-    kModDepth,
-    kModShape,
-
-    kParamCount
-};
-
 #endif

@@ -118,7 +118,9 @@
  C:/msys64/mingw64/include/KHR/khrplatform.h \
  ../../dpf/distrho/../dgl/TopLevelWidget.hpp \
  ../../dpf/dgl/ImageWidgets.hpp ../../dpf/dgl/Image.hpp \
- ../../dpf/dgl/OpenGL.hpp PlateauArtwork.cpp PlateauArtwork.hpp
+ ../../dpf/dgl/OpenGL.hpp widgets/StaticImage.hpp ../../dpf/dgl/Image.hpp \
+ widgets/StaticImageBase.hpp ../../dpf/dgl/SubWidget.hpp \
+ PlateauArtwork.cpp PlateauArtwork.hpp Parameters.hpp
 PlateauUI.hpp:
 ../../dpf/distrho/DistrhoUI.hpp:
 ../../dpf/distrho/DistrhoDetails.hpp:
@@ -253,5 +255,10 @@ C:/msys64/mingw64/include/KHR/khrplatform.h:
 ../../dpf/dgl/ImageWidgets.hpp:
 ../../dpf/dgl/Image.hpp:
 ../../dpf/dgl/OpenGL.hpp:
+widgets/StaticImage.hpp:
+../../dpf/dgl/Image.hpp:
+widgets/StaticImageBase.hpp:
+../../dpf/dgl/SubWidget.hpp:
 PlateauArtwork.cpp:
 PlateauArtwork.hpp:
+Parameters.hpp:

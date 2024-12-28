@@ -17,7 +17,8 @@ NAME = Plateau
 
 FILES_DSP = PlateauPlugin.cpp
 
-FILES_UI = PlateauUI.cpp
+FILES_UI = PlateauUI.cpp \
+widgets/StaticImageBase.cpp \
 
 # --------------------------------------------------------------
 # Do some magic

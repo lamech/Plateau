@@ -167,7 +167,8 @@
  C:/msys64/mingw64/include/assert.h dsp/Utilities.hpp \
  dsp/OnePoleFilters.cpp dsp/OnePoleFilters.hpp dsp/LFO.hpp \
  C:/msys64/mingw64/include/c++/14.2.0/array \
- C:/msys64/mingw64/include/c++/14.2.0/compare
+ C:/msys64/mingw64/include/c++/14.2.0/compare dsp/LinearEnvelope.cpp \
+ dsp/LinearEnvelope.hpp Parameters.hpp
 ../../dpf/distrho/DistrhoPlugin.hpp:
 ../../dpf/distrho/DistrhoDetails.hpp:
 ../../dpf/distrho/extra/String.hpp:
@@ -348,3 +349,6 @@ dsp/OnePoleFilters.hpp:
 dsp/LFO.hpp:
 C:/msys64/mingw64/include/c++/14.2.0/array:
 C:/msys64/mingw64/include/c++/14.2.0/compare:
+dsp/LinearEnvelope.cpp:
+dsp/LinearEnvelope.hpp:
+Parameters.hpp:
