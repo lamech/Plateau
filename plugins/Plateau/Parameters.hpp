@@ -44,8 +44,8 @@ const ParameterInfo parameterInfos[] = {
     {"Modulation Speed", "modSpeed", 0.0f, 0.0f, 1.0f, kParameterIsAutomatable},
     {"Modulation Depth", "modDepth", 0.5f, 0.0f, 16.0f, kParameterIsAutomatable},
     {"Modulation Shape", "modShape", 0.5f, 0.0f, 1.0f, kParameterIsAutomatable},
-    {"Freeze", "freeze", 0.0f, 0.0f, 1.0f, kParameterIsAutomatable},
-    {"Clear", "clearParam", 0.0f, 0.0f, 1.0f, kParameterIsAutomatable},
-    {"Tuned Mode", "tunedMode", 0.0f, 0.0f, 1.0f, kParameterIsAutomatable},
-    {"Diffuse Input", "diffuseInput", 1.0f, 0.0f, 1.0f, kParameterIsAutomatable}
+    {"Freeze", "freeze", 0.0f, 0.0f, 1.0f, kParameterIsAutomatable | kParameterIsBoolean},
+    {"Clear", "clearParam", 0.0f, 0.0f, 1.0f, kParameterIsAutomatable | kParameterIsTrigger},
+    {"Tuned Mode", "tunedMode", 0.0f, 0.0f, 1.0f, kParameterIsAutomatable | kParameterIsBoolean},
+    {"Diffuse Input", "diffuseInput", 1.0f, 0.0f, 1.0f, kParameterIsAutomatable | kParameterIsBoolean}
 };

@@ -34,6 +34,6 @@ void StaticImageBase<ImageType>::onDisplay()
     pData->image.draw(context);
 }
 
-END_NAMESPACE_DGL
-
 template class StaticImageBase<OpenGLImage>;
+
+END_NAMESPACE_DGL
