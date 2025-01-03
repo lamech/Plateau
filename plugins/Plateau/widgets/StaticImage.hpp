@@ -3,6 +3,6 @@
 
 START_NAMESPACE_DGL
 
-typedef StaticImageBase<OpenGLImage> StaticImage;
+typedef StaticImageBase<CairoImage> StaticImage;
 
 END_NAMESPACE_DGL

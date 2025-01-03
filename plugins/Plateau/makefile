@@ -5,7 +5,6 @@
 #
 # Modified by REIS0
 
-VST3 ?= true
 
 # --------------------------------------------------------------
 # Project name, used for binaries
@@ -20,17 +19,17 @@ FILES_DSP = PlateauPlugin.cpp
 FILES_UI = PlateauUI.cpp \
 widgets/StaticImageBase.cpp \
 
+
 # --------------------------------------------------------------
 # Do some magic
 
+UI_TYPE = cairo
 include ../../dpf/Makefile.plugins.mk
 
 # --------------------------------------------------------------
 # VST3 target
 
-ifeq ($(VST3), true)
 TARGETS += vst3
-endif
 
 all: $(TARGETS)
 

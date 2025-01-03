@@ -34,6 +34,6 @@ void StaticImageBase<ImageType>::onDisplay()
     pData->image.draw(context);
 }
 
-template class StaticImageBase<OpenGLImage>;
+template class StaticImageBase<CairoImage>;
 
 END_NAMESPACE_DGL

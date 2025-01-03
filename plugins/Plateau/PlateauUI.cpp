@@ -24,7 +24,7 @@ START_NAMESPACE_DISTRHO
 namespace Art = PlateauArtwork;
 
 PlateauUI::PlateauUI()
-    : UI(Art::backgroundWidth, Art::backgroundHeight, true),
+    : UI(Art::backgroundWidth, Art::backgroundHeight, false),
       fImgBackground(Art::backgroundData, Art::backgroundWidth, Art::backgroundHeight, kImageFormatBGR)
 {
     Image medRoganImage(Art::medRoganData, Art::medRoganWidth, Art::medRoganHeight, kImageFormatBGRA);

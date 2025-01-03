@@ -2,7 +2,7 @@
 #define DISTRHO_UI_PINGPONGPAN_HPP_INCLUDED
 
 #include "DistrhoUI.hpp"
-// #define DGL_CAIRO 1
+#define DGL_CAIRO 1
 
 #include "ImageWidgets.hpp"
 #include "widgets/StaticImage.hpp"

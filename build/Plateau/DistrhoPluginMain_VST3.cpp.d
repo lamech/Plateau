@@ -86,10 +86,7 @@
  ../../dpf/distrho/src/../src/DistrhoPluginChecks.h DistrhoPluginInfo.h \
  ../../dpf/distrho/src/DistrhoPluginVST.hpp \
  ../../dpf/distrho/src/DistrhoPluginChecks.h \
- ../../dpf/distrho/src/../DistrhoUtils.hpp ../../dpf/dgl/Base.hpp \
- ../../dpf/dgl/../distrho/extra/LeakDetector.hpp \
- ../../dpf/dgl/../distrho/extra/ScopedPointer.hpp \
- ../../dpf/dgl/../distrho/extra/../DistrhoUtils.hpp \
+ ../../dpf/distrho/src/../DistrhoUtils.hpp \
  C:/msys64/mingw64/include/c++/14.2.0/atomic \
  C:/msys64/mingw64/include/c++/14.2.0/bits/atomic_base.h \
  C:/msys64/mingw64/include/c++/14.2.0/bits/atomic_lockfree_defines.h \
@@ -112,7 +109,6 @@
  ../../dpf/distrho/src/../DistrhoPluginUtils.hpp \
  ../../dpf/distrho/src/../DistrhoPlugin.hpp \
  ../../dpf/distrho/src/../extra/ScopedPointer.hpp \
- ../../dpf/distrho/src/../extra/RingBuffer.hpp \
  ../../dpf/distrho/src/travesty/audio_processor.h \
  ../../dpf/distrho/src/travesty/base.h \
  C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/stdbool.h \
@@ -469,10 +465,6 @@ DistrhoPluginInfo.h:
 ../../dpf/distrho/src/DistrhoPluginVST.hpp:
 ../../dpf/distrho/src/DistrhoPluginChecks.h:
 ../../dpf/distrho/src/../DistrhoUtils.hpp:
-../../dpf/dgl/Base.hpp:
-../../dpf/dgl/../distrho/extra/LeakDetector.hpp:
-../../dpf/dgl/../distrho/extra/ScopedPointer.hpp:
-../../dpf/dgl/../distrho/extra/../DistrhoUtils.hpp:
 C:/msys64/mingw64/include/c++/14.2.0/atomic:
 C:/msys64/mingw64/include/c++/14.2.0/bits/atomic_base.h:
 C:/msys64/mingw64/include/c++/14.2.0/bits/atomic_lockfree_defines.h:
@@ -495,7 +487,6 @@ C:/msys64/mingw64/include/c++/14.2.0/bits/erase_if.h:
 ../../dpf/distrho/src/../DistrhoPluginUtils.hpp:
 ../../dpf/distrho/src/../DistrhoPlugin.hpp:
 ../../dpf/distrho/src/../extra/ScopedPointer.hpp:
-../../dpf/distrho/src/../extra/RingBuffer.hpp:
 ../../dpf/distrho/src/travesty/audio_processor.h:
 ../../dpf/distrho/src/travesty/base.h:
 C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/stdbool.h:
