@@ -1,0 +1,16 @@
+Valley Plateau reverb, wrapped in a plugin for convenience.
+
+On Windows, builds a VST3.
+On MacOS, builds a VST3 and an AU.
+
+To use:
+
+```
+git clone --recursive https://github.com/rubyswolf/Plateau
+cd Plateau/plugins/Plateau
+make
+```
+Author: rubyswolf
+Mac build: lamech
+
+January, 2025
