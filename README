@@ -1,7 +1,8 @@
 Valley Plateau reverb, wrapped in a plugin for convenience.
+Original Valley Plateau "free" distribution: https://github.com/ValleyAudio/ValleyRackFree
 
-On Windows, builds a VST3.
-On MacOS, builds a VST3 and an AU.
+On Windows, this repo builds a VST3.
+On MacOS, this repo builds a VST3 and an AU.
 
 To use:
 
