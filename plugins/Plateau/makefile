@@ -4,7 +4,7 @@
 # Created by falkTX
 #
 # Modified by REIS0
-
+# Modified by lamech
 
 # --------------------------------------------------------------
 # Project name, used for binaries
@@ -19,7 +19,6 @@ FILES_DSP = PlateauPlugin.cpp
 FILES_UI = PlateauUI.cpp \
 widgets/StaticImageBase.cpp \
 
-
 # --------------------------------------------------------------
 # Do some magic
 
@@ -31,7 +30,17 @@ include ../../dpf/Makefile.plugins.mk
 
 TARGETS += vst3
 
-all: $(TARGETS)
+# --------------------------------------------------------------
+# AU target
+
+ifeq ($(MACOS),true)
+TARGETS += au
+endif
+
+check:
+	@echo "Building targets: $(TARGETS)"
+
+all: check $(TARGETS)
 
 art: # Converts the artwork to a header file
 	python png2rgba.py PlateauArtwork artwork

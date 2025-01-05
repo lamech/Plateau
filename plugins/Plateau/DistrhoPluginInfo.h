@@ -15,4 +15,9 @@
 #define DISTRHO_UI_USER_RESIZABLE 0
 #define DISTRHO_UI_USE_NANOVG 0
 
+//AU
+#define DISTRHO_PLUGIN_BRAND_ID Vlly
+#define DISTRHO_PLUGIN_UNIQUE_ID pltu
+#define DISTRHO_PLUGIN_CLAP_ID "pltu"
+
 #endif
