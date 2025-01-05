@@ -10,6 +10,9 @@ git clone --recursive https://github.com/rubyswolf/Plateau
 cd Plateau/plugins/Plateau
 make
 ```
+
+Plugins will be built in the `bin` directory.
+
 Author: rubyswolf
 Mac build: lamech
 
