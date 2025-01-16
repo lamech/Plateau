@@ -17,6 +17,7 @@ Plugins will be built in the `bin` directory.
 NOTE: On a Mac, you may need to remove the quarantine attribute before installing plugins:
 
 ```
+cd bin # Or wherever your plugins are located
 sudo /usr/sbin/xattr -r -d com.apple.quarantine Plateau.component
 sudo /usr/sbin/xattr -r -d com.apple.quarantine Plateau.vst3
 ```
