@@ -22,7 +22,7 @@ sudo /usr/sbin/xattr -r -d com.apple.quarantine Plateau.component
 sudo /usr/sbin/xattr -r -d com.apple.quarantine Plateau.vst3
 ```
 
-Author: rubyswolf
-Mac build: lamech
+* Author: rubyswolf
+* Mac build: lamech
 
 January, 2025
