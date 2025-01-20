@@ -5,7 +5,7 @@ on:
 
 jobs:
   macos:
-    runs-on: macos-14
+    runs-on: macos-13
     steps:
       - uses: actions/checkout@v4
         with:
@@ -13,10 +13,13 @@ jobs:
       - name: Run the build
         shell: bash
         run: |
+          set -x
           cd plugins/Plateau
           make
           cd ../..
           curl -L "https://github.com/Tracktion/pluginval/releases/latest/download/pluginval_macOS.zip" -o pluginval.zip
           unzip pluginval.zip
           pluginval.app/Contents/MacOS/pluginval --strictness-level 5 --verbose --validate-in-process --output-dir . bin/Plateau.vst3
+          mkdir -p ~/Library/Audio/Plug-Ins/Components
+          cp -R bin/Plateau.component ~/Library/Audio/Plug-Ins/Components
           pluginval.app/Contents/MacOS/pluginval --strictness-level 5 --verbose --validate-in-process --output-dir . bin/Plateau.component
