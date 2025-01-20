@@ -22,7 +22,6 @@ jobs:
           pluginval.app/Contents/MacOS/pluginval --strictness-level 5 --verbose --validate-in-process --output-dir . bin/Plateau.vst3
           mkdir -p ~/Library/Audio/Plug-Ins/Components
           cp -R bin/Plateau.component ~/Library/Audio/Plug-Ins/Components
+          # https://github.com/Tracktion/pluginval/issues/122
           killall -9 AudioComponentRegistrar || true
-          auvaltool -l
-          auvaltool -v aufx pltu Vlly
           pluginval.app/Contents/MacOS/pluginval --strictness-level 5 --verbose --validate-in-process --output-dir . bin/Plateau.component
