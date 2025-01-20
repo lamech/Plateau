@@ -10,7 +10,14 @@ jobs:
       - uses: actions/checkout@v4
         with:
           submodules: recursive
-      - name: Run the build
+      - name: Establish build date-time stamp
+        shell: bash
+        run: |
+          set -x
+          export DT=$(date +%F_%H%M%S)
+          export ZIPFILE=pltu-macos-$DT.zip
+          echo "ZIPFILE=$ZIPFILE" >> $GITHUB_ENV
+      - name: Build and validate plugins
         shell: bash
         run: |
           set -x
@@ -25,3 +32,9 @@ jobs:
           # https://github.com/Tracktion/pluginval/issues/122
           killall -9 AudioComponentRegistrar || true
           pluginval.app/Contents/MacOS/pluginval --strictness-level 5 --verbose --validate-in-process --output-dir . bin/Plateau.component
+          echo "Creating $ZIPFILE ..."
+          cd bin && zip "$ZIPFILE" -r Plateau.* && mv "$ZIPFILE" ~
+      - uses: actions/upload-artifact@v4
+        with:
+          name: "${{ env.ZIPFILE }}"
+          path: "${{ env.ZIPFILE }}"
