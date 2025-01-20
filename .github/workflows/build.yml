@@ -1,0 +1,21 @@
+name: build
+
+on:
+  workflow_dispatch:
+
+jobs:
+  macos:
+    runs-on: macos-13
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: Run the build
+        shell: bash
+        run: |
+          cd plugins/Plateau
+          make
+          which auvaltool
+          curl -L "https://github.com/Tracktion/pluginval/releases/latest/download/pluginval_macOS.zip" -o pluginval.zip
+          unzip pluginval.zip
+          pluginval.app/Contents/MacOS/pluginval --validate-in-process --output-dir . bin/Plateau.vst3
