@@ -15,7 +15,10 @@ jobs:
         run: |
           cd plugins/Plateau
           make
-          which auvaltool
+          cd ../..
           curl -L "https://github.com/Tracktion/pluginval/releases/latest/download/pluginval_macOS.zip" -o pluginval.zip
           unzip pluginval.zip
           pluginval.app/Contents/MacOS/pluginval --validate-in-process --output-dir . bin/Plateau.vst3
+          sudo cp -R bin/Plateau.component /Library/Audio/Plug-Ins/Components
+          auvaltool -l|grep pltu
+          auvaltool -v aufx pltu Vlly
